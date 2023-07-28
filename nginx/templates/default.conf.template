@@ -1,0 +1,47 @@
+upstream arlina_admin {
+  server arlina-admin:${REACT_APP_WEB_ADMIN_PORT};
+}
+
+upstream arlina_user {
+  server arlina-user:${REACT_APP_WEB_USER_PORT};
+}
+
+upstream arlina_api {
+  server arlina-api:${API_PORT};
+}
+
+upstream arlina_jwt {
+  server arlina-jwt:${JWT_PORT};
+}
+
+server {
+  listen 80;
+  access_log /var/log/nginx/access.log ;
+  include /etc/nginx/vhost.d/default;
+
+  location / {
+    proxy_pass http://arlina_user;
+  }
+
+  location /ws {
+    proxy_pass http://client;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+
+  location /admin {
+    rewrite /(.*) /$1 break;
+    proxy_pass http://arlina_admin;
+  }
+
+  location /api {
+    rewrite /api/(.*) /$1 break;
+    proxy_pass http://arlina_api;
+  }
+
+  location /api/auth {
+    rewrite /api/auth/(.*) /$1 break;
+    proxy_pass http://arlina_jwt;
+  }
+}
