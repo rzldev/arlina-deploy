@@ -67,8 +67,6 @@ services:
     image: arlinadocker/arlina-admin:latest
     environment:
       - WDS_SOCKET_PORT=0
-    ports:
-      - ${REACT_APP_WEB_ADMIN_PORT}:80
     networks:
       - arlinamp
 
@@ -78,8 +76,6 @@ services:
     image: arlinadocker/arlina-user:latest
     environment:
       - WDS_SOCKET_PORT=0
-    ports:
-      - ${REACT_APP_WEB_USER_PORT}:80
     networks:
       - arlinamp
 

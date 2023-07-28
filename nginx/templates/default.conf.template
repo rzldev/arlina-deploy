@@ -17,17 +17,10 @@ upstream arlina_jwt {
 server {
   listen 80;
   access_log /var/log/nginx/access.log ;
-  include /etc/nginx/vhost.d/default;
+  server_name arlina.id www.arlina.id;
 
   location / {
     proxy_pass http://arlina_user;
-  }
-
-  location /ws {
-    proxy_pass http://client;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
   }
 
   location /admin {
