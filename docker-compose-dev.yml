@@ -6,6 +6,8 @@ services:
     container_name: arlina-api
     image: arlinadocker/api:latest
     restart: unless-stopped
+    env_file:
+      - .env.backend
     environment:
       - QUARKUS_HTTP_CORS_ORIGINS=${CORS_ORIGINS}
       - QUARKUS_DATASOURCE_USERNAME=${MYSQL_USER}
@@ -36,6 +38,8 @@ services:
     container_name: arlina-jwt
     image: arlinadocker/auth-jwt:latest
     restart: unless-stopped
+    env_file:
+      - .env.backend
     environment:
       - QUARKUS_HTTP_CORS_ORIGINS=${CORS_ORIGINS}
       - QUARKUS_DATASOURCE_USERNAME=${MYSQL_USER}
@@ -65,8 +69,15 @@ services:
     container_name: arlina-admin
     hostname: arlina-admin
     image: arlinadocker/arlina-admin:latest
+    restart: unless-stopped
     environment:
       - WDS_SOCKET_PORT=0
+    env_file:
+      - .env.frontend
+    ports:
+      - 8008:80
+    expose:
+      - 8008
     networks:
       - arlinamp
 
@@ -74,8 +85,15 @@ services:
     container_name: arlina-user
     hostname: arlina-user
     image: arlinadocker/arlina-user:latest
+    restart: unless-stopped
     environment:
       - WDS_SOCKET_PORT=0
+    env_file:
+      - .env.frontend
+    ports:
+      - 3008:80
+    expose:
+      - 3008
     networks:
       - arlinamp
 

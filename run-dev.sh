@@ -1,8 +1,5 @@
 #!/bin/bash
 
-## Generate JWT
-./generateJwtKeys.sh
-
 ## Run docker containers
 docker pull arlinadocker/arlina-admin:latest
 docker pull arlinadocker/arlina-user:latest

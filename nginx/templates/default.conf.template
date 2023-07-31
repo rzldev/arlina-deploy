@@ -1,9 +1,9 @@
 upstream arlina_admin {
-  server arlina-admin:${REACT_APP_WEB_ADMIN_PORT};
+  server arlina-admin;
 }
 
 upstream arlina_user {
-  server arlina-user:${REACT_APP_WEB_USER_PORT};
+  server arlina-user;
 }
 
 upstream arlina_api {
@@ -24,17 +24,15 @@ server {
   }
 
   location /admin {
-    rewrite /(.*) /$1 break;
+    rewrite /admin/(.*) /$1 break;
     proxy_pass http://arlina_admin;
   }
 
   location /api {
-    rewrite /api/(.*) /$1 break;
     proxy_pass http://arlina_api;
   }
 
   location /api/auth {
-    rewrite /api/auth/(.*) /$1 break;
     proxy_pass http://arlina_jwt;
   }
 }
