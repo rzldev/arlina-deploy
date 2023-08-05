@@ -24,9 +24,6 @@ services:
       - ./jwt:/jwt
     networks:
       - arlinamp
-    depends_on:
-      mysqldb: 
-        condition: service_healthy
 
   arlina-jwt:
     hostname: arlina-jwt
@@ -51,9 +48,6 @@ services:
       - ./jwt:/jwt
     networks:
       - arlinamp
-    depends_on:
-      mysqldb: 
-        condition: service_healthy
 
   arlina-admin:
     container_name: arlina-admin
