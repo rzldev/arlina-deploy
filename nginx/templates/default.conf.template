@@ -25,7 +25,7 @@ upstream arlina_minio_console {
 server {
   listen 80;
   access_log /var/log/nginx/access.log ;
-  server_name arlina.id www.arlina.id;
+  server_name ${DNS_NAME} www.${DNS_NAME};
 
   ignore_invalid_headers off;
   
@@ -55,7 +55,7 @@ server {
 server {
   listen 80;
   access_log /var/log/nginx/access.log ;
-  server_name minio.arlina.id www.minio.arlina.id;
+  server_name minio.${DNS_NAME} www.minio.${DNS_NAME};
 
   ignore_invalid_headers off;
   
