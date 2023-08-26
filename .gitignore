@@ -4,3 +4,5 @@
 conf.d
 
 jwt/
+
+arlinadb-data.sql
