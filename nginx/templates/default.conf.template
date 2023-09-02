@@ -41,7 +41,7 @@ server {
 server {
   listen 443 ssl;
   http2 on;
-  server_name ${DNS_NAME;
+  server_name ${DNS_NAME};
 
   ssl_certificate /etc/nginx/certs/arlina.id.chained.crt;
   ssl_certificate_key /etc/nginx/certs/arlina.id.key;
@@ -125,6 +125,8 @@ server {
 server {
   listen 443 ssl;
   server_name www.${MINIO_DNS_NAME};
+  ssl_certificate /etc/nginx/certs/arlina.id.chained.crt;
+  ssl_certificate_key /etc/nginx/certs/arlina.id.key;
 
   return 301 https://${MINIO_DNS_NAME}$request_uri;
 }
