@@ -1,8 +1,5 @@
 #!/bin/bash
 
-## Generate .env
-cat .env.backend <(echo '') .env.frontend > .env
-
 ## Generate conf.d
 ENV_FILE=.env
 source $ENV_FILE
