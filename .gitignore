@@ -6,6 +6,7 @@
 conf.d
 
 jwt/
+mysql/
 
 arlinadb-data.sql
 
