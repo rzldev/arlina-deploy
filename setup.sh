@@ -10,3 +10,6 @@ envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < nginx/templates/default.c
 
 ## Generate JWT
 ./generateJwtKeys.sh
+
+## Generating multiple env files from .env
+./separatingEnvFiles.sh

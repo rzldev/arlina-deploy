@@ -38,4 +38,4 @@ else
     docker-compose -f "docker-compose-$mode.yml" up -d
 fi
 
-docker exec arlina-minio sh -c "/scripts/init.sh";
+./post-run.sh
