@@ -1,11 +1,13 @@
 .DS_Store
 
+# environments
 .env
 .env.frontend
 .env.backend
 .env.web_server
 conf.d
 
+# jwt
 jwt/
 
 # mysql
