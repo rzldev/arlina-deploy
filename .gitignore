@@ -7,9 +7,11 @@
 conf.d
 
 jwt/
-mysql/
 
+# mysql
 arlinadb-data*.sql
+arlinadb-schema-*.sql
+
 *.tar*
 
 nginx/certs/
