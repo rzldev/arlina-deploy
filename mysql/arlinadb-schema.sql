@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: arlinadb
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,18 +28,10 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `updated_at` datetime(6) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
+  `is_prioritized` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categories`
---
-
-LOCK TABLES `categories` WRITE;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `company_profile`
@@ -65,16 +57,6 @@ CREATE TABLE IF NOT EXISTS `company_profile` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `company_profile`
---
-
-LOCK TABLES `company_profile` WRITE;
-/*!40000 ALTER TABLE `company_profile` DISABLE KEYS */;
-INSERT INTO `company_profile` VALUES ('2023-08-26 08:01:35.000000',1,'2023-08-26 08:01:35.000000','','','Arlina','','',NULL,NULL,NULL);
-/*!40000 ALTER TABLE `company_profile` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `product_categories`
 --
 
@@ -92,15 +74,6 @@ CREATE TABLE IF NOT EXISTS `product_categories` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `product_categories`
---
-
-LOCK TABLES `product_categories` WRITE;
-/*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `product_images`
 --
 
@@ -114,20 +87,12 @@ CREATE TABLE IF NOT EXISTS `product_images` (
   `product_id` bigint NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `filepath` varchar(255) NOT NULL,
+  `is_cover` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FKqnq71xsohugpqwf3c9gxmsuy` (`product_id`),
   CONSTRAINT `FKqnq71xsohugpqwf3c9gxmsuy` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7924 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product_images`
---
-
-LOCK TABLES `product_images` WRITE;
-/*!40000 ALTER TABLE `product_images` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product_images` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `products`
@@ -146,18 +111,27 @@ CREATE TABLE IF NOT EXISTS `products` (
   `writer` varchar(100) DEFAULT NULL,
   `description` text NOT NULL,
   `siplahURL` text,
+  `including_tax` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1982 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `products`
+-- Table structure for table `release_notes`
 --
 
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
+-- DROP TABLE IF EXISTS `release_notes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `release_notes` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) DEFAULT NULL,
+  `deleted_at` datetime(6) DEFAULT NULL,
+  `note` text NOT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `roles`
@@ -174,16 +148,6 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `roles`
---
-
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES ('2023-08-26 08:01:35.000000',1,'2023-08-26 08:01:35.000000','ADMIN'),('2023-08-26 08:01:35.000000',2,'2023-08-26 08:01:35.000000','USER');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -204,17 +168,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`),
   KEY `FKp56c1712k691lhsyewcssf40f` (`role_id`),
   CONSTRAINT `FKp56c1712k691lhsyewcssf40f` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -225,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-26 15:13:17
+-- Dump completed on 2023-12-19 21:54:10
