@@ -16,11 +16,21 @@ while IFS= read -r line || [ -n "$line" ]; do
         # Reset the output file
         > "$output_file"
 
-        # Write the section line to the output file
-        echo "$line" >> "$output_file"
+        # Check if the line is a comment or empty
+        if [[ "$line" =~ ^\s*# || -z "$line" ]]; then
+            continue  # Skip commented or empty lines
+        else
+            # Write the section line to the output file
+            echo "$line" >> "$output_file"
+        fi
     else
-        # Write the line to the current output file
-        echo "$line" >> "$output_file"
+        # Check if the line is a comment or empty
+        if [[ "$line" =~ ^\s*# || -z "$line" ]]; then
+            continue  # Skip commented or empty lines
+        else
+            # Write the line to the current output file
+            echo "$line" >> "$output_file"
+        fi
     fi
 done < "$input_file"
 
